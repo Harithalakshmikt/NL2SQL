@@ -92,6 +92,14 @@ appointments(id, patient_id, doctor_id, appointment_date, status, notes)
 treatments(id, appointment_id, treatment_name, cost, duration_minutes)
 invoices(id, patient_id, invoice_date, total_amount, paid_amount, status)
 
+appointments.patient_id -> patients.id
+appointments.doctor_id -> doctors.id
+treatments.appointment_id -> appointments.id
+invoices.patient_id -> patients.id
+
+DO NOT INVENT COLUMNS.
+USE ONLY COLUMNS LISTED IN THE SCHEMA.
+
 STRICT RULES:
 - Use ONLY SQLite syntax
 - NEVER use EXTRACT(), DATE_TRUNC(), DAYOFWEEK()
