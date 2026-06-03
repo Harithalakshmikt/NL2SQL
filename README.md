@@ -22,10 +22,13 @@ The system:
 * **Python 3.10+**
 * **FastAPI** – Backend API
 * **SQLite** – Database
-* **Groq (LLM)** – SQL generation
-* **Pandas / Plotly (optional)** – Data handling & visualization
+* **Groq API (LLM)** – SQL Generation
+* **Docker** – Containerization
+* **Render** – Cloud Deployment
 * **python-dotenv**
-*  **Uvicorn** - To run FastAPI
+* **Uvicorn** – ASGI Server
+* **Git & GitHub** – Version Control
+
 
 ---
 
@@ -43,10 +46,16 @@ User Question
 
 * Convert natural language → SQL queries
 * SQLite-compatible SQL generation
-* SQL validation (safe execution)
+* Schema-aware prompt engineering
+* SQL validation and sanitization
 * Error handling for invalid queries
-* Supports joins, aggregations, filters
+* Query correction for common LLM-generated mistakes
+* Supports joins, aggregations, filters, and trend analysis
 * Time-based queries using `strftime()`
+* REST API endpoints using FastAPI
+* Dockerized application deployment
+* Public cloud deployment using Render
+
 
 ---
 
@@ -65,12 +74,15 @@ After spending significant time debugging these issues, a decision was made to i
 
 ### What was implemented manually?
 
-* LLM-based SQL generation using Groq
+* LLM-based SQL generation using Groq API
 * SQL validation layer (SELECT-only + safety checks)
 * Query correction and fallback handling
 * Direct SQLite execution pipeline
+* FastAPI REST API backend
+* Docker containerization and deployment workflow
 
-This approach resulted in a stable system with **95% accuracy (19/20 queries)**.
+This approach resulted in a stable system with **95% accuracy (19/20 queries)** and successful deployment on Render.
+
 
 ---
 
@@ -199,31 +211,46 @@ Results include:
 
 ## 🎯 Conclusion
 
-This project demonstrates a robust NL2SQL system with high accuracy and strong error handling.
+This project demonstrates the design and deployment of a production-oriented NL2SQL system using LLMs, FastAPI, SQLite, Docker, and Render.
 
 It highlights:
 
 * Practical challenges in LLM-based SQL generation
-* Importance of validation and prompt engineering
-* Real-world debugging and system design decisions
+* Prompt engineering and SQL validation techniques
+* Real-world debugging and reliability improvements
+* API development and backend system design
+* Containerization and cloud deployment workflows
 
----
+The final system achieved **95% query accuracy**, successfully handled real-world SQL generation issues, and was deployed as a publicly accessible API service.
+
 
 ## 📂 Project Structure
 
-```
-project/
-├── setup_database.py
-├── database.py
-├── llm.py
-├── main.py
-├── requirements.txt
-├── README.md
-├── RESULTS.md
-└── clinic.db
+```text
+NL2SQL/
+├── main.py              # FastAPI application entry point
+├── llm.py               # LLM-based SQL generation and validation
+├── database.py          # Database connection and query execution
+├── clinic.db            # SQLite healthcare database
+├── setup_database.py    # Database initialization script
+├── Dockerfile           # Docker container configuration
+├── requirements.txt     # Project dependencies
+├── RESULTS.md           # Evaluation results and analysis
+├── README.md            # Project documentation
+├── .gitignore
+└── .dockerignore
 ```
 
+## 🌐 Deployment
+
+The application has been containerized using Docker and deployed on Render.
+
+**Live Demo:** https://nl2sql-0prb.onrender.com/
+
+**API Documentation:** https://nl2sql-0prb.onrender.com/docs
+
 ---
+
 
 ## 🚀 Final Note
 
